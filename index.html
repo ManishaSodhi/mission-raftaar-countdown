@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08172f">
+  <meta name="description" content="Live registration countdown for Mission Raftaar District-Level Tech Fair 2026–27.">
+  <title>Mission Raftaar | Registration Countdown</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --navy: #08172f;
+      --panel: rgba(15, 37, 70, .82);
+      --cyan: #55dcff;
+      --gold: #ffd166;
+      --white: #f5f9ff;
+      --muted: #b8c9df;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: grid; place-items: center;
+      padding: 28px 16px; color: var(--white);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(ellipse at 15% 10%, rgba(28, 125, 190, .28), transparent 38%),
+        radial-gradient(ellipse at 85% 85%, rgba(91, 64, 180, .22), transparent 40%),
+        linear-gradient(135deg, #061226, #102b50 55%, #08172f);
+      overflow-x: hidden;
+    }
+    .shell { width: min(900px, 100%); position: relative; }
+    .glow {
+      position: absolute; inset: 8% 10%; border-radius: 50%;
+      background: rgba(54, 185, 255, .10); filter: blur(70px); pointer-events: none;
+    }
+    .card {
+      position: relative; padding: clamp(26px, 6vw, 58px);
+      border: 1px solid rgba(157, 209, 255, .25);
+      border-radius: 28px; text-align: center;
+      background: linear-gradient(145deg, rgba(16, 43, 79, .92), rgba(7, 22, 45, .94));
+      box-shadow: 0 24px 80px rgba(0,0,0,.38), inset 0 1px rgba(255,255,255,.08);
+      backdrop-filter: blur(12px);
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 8px 14px; border: 1px solid rgba(85,220,255,.35);
+      border-radius: 999px; color: var(--cyan); background: rgba(85,220,255,.08);
+      font-size: .76rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ef0b5; box-shadow: 0 0 12px #4ef0b5; }
+    h1 { margin: 23px 0 8px; font-size: clamp(2rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -.045em; }
+    h1 span { color: var(--cyan); }
+    .subtitle { margin: 0 auto; max-width: 620px; color: var(--muted); font-size: clamp(.98rem, 2.2vw, 1.15rem); line-height: 1.6; }
+    .deadline {
+      margin: 25px 0 27px; color: #d8e8fb; font-size: .9rem; letter-spacing: .04em;
+    }
+    .deadline strong { color: var(--gold); font-weight: 750; }
+    .timer {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(8px, 2vw, 16px); margin: 0 auto 27px; max-width: 690px;
+    }
+    .unit {
+      padding: clamp(13px, 3vw, 22px) 6px; border-radius: 18px;
+      border: 1px solid rgba(123, 194, 255, .23);
+      background: linear-gradient(180deg, rgba(34, 71, 116, .72), rgba(13, 34, 65, .9));
+      box-shadow: inset 0 1px rgba(255,255,255,.07), 0 10px 25px rgba(0,0,0,.16);
+    }
+    .number {
+      display: block; font-variant-numeric: tabular-nums;
+      font-size: clamp(2rem, 7vw, 4rem); font-weight: 850;
+      line-height: 1.1; letter-spacing: -.055em; color: #fff;
+    }
+    .label { display: block; margin-top: 8px; color: #a9c5e4; font-size: .68rem; font-weight: 800; letter-spacing: .15em; }
+    .message { min-height: 26px; margin: 0 0 22px; color: #c5d8ed; font-size: .95rem; }
+    .cta {
+      display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+      min-height: 54px; padding: 0 27px; border-radius: 999px;
+      color: #07172b; background: linear-gradient(100deg, #6ce6ff, #9af5d0);
+      text-decoration: none; font-weight: 850; letter-spacing: .01em;
+      box-shadow: 0 10px 28px rgba(74, 210, 239, .22);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(74, 210, 239, .32); }
+    .footer { margin-top: 27px; color: #91a9c5; font-size: .78rem; line-height: 1.6; }
+    .closed h1 { color: var(--gold); }
+    .closed .unit { opacity: .55; }
+    @media (max-width: 480px) {
+      .card { border-radius: 22px; }
+      .timer { gap: 7px; }
+      .unit { border-radius: 13px; }
+      .label { font-size: .57rem; letter-spacing: .09em; }
+      .cta { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="glow" aria-hidden="true"></div>
+    <section class="card" id="countdownCard" aria-labelledby="title">
+      <div class="eyebrow"><span class="dot" aria-hidden="true"></span> Registration countdown</div>
+      <h1 id="title">MISSION <span>RAFTAAR</span></h1>
+      <p class="subtitle">District-Level Digital Innovation Fair<br><strong>Tech Fair 2026–27</strong></p>
+      <p class="deadline">Registration closes: <strong>14 November 2026 · 11:59 PM IST</strong></p>
+
+      <div class="timer" role="timer" aria-label="Time remaining until registration closes">
+        <div class="unit"><span class="number" id="days">--</span><span class="label">DAYS</span></div>
+        <div class="unit"><span class="number" id="hours">--</span><span class="label">HOURS</span></div>
+        <div class="unit"><span class="number" id="minutes">--</span><span class="label">MINUTES</span></div>
+        <div class="unit"><span class="number" id="seconds">--</span><span class="label">SECONDS</span></div>
+      </div>
+
+      <p class="message" id="message" aria-live="polite">Every great innovation begins with an idea. Register before the deadline!</p>
+      <a class="cta" id="registerButton" href="https://missionraftaar.org/tech_fair_register.php" target="_blank" rel="noopener noreferrer">
+        Register Now <span aria-hidden="true">↗</span>
+      </a>
+      <p class="footer">Don't wait for the last moment. Submit your registration today.<br>MissionRaftaar.org</p>
+    </section>
+  </main>
+
+  <script>
+    // Deadline is explicitly set in Indian Standard Time (UTC+05:30).
+    const deadline = new Date("2026-11-14T23:59:00+05:30").getTime();
+    const fields = {
+      days: document.getElementById("days"),
+      hours: document.getElementById("hours"),
+      minutes: document.getElementById("minutes"),
+      seconds: document.getElementById("seconds")
+    };
+    const card = document.getElementById("countdownCard");
+    const message = document.getElementById("message");
+    const registerButton = document.getElementById("registerButton");
+
+    function updateCountdown() {
+      const remaining = deadline - Date.now();
+
+      if (remaining <= 0) {
+        Object.values(fields).forEach(field => field.textContent = "00");
+        card.classList.add("closed");
+        message.textContent = "Registration deadline has passed. Thank you for your interest!";
+        registerButton.textContent = "Registration Closed";
+        registerButton.removeAttribute("href");
+        registerButton.removeAttribute("target");
+        registerButton.setAttribute("aria-disabled", "true");
+        registerButton.style.pointerEvents = "none";
+        registerButton.style.opacity = ".65";
+        return;
+      }
+
+      const totalSeconds = Math.floor(remaining / 1000);
+      fields.days.textContent = String(Math.floor(totalSeconds / 86400)).padStart(2, "0");
+      fields.hours.textContent = String(Math.floor((totalSeconds % 86400) / 3600)).padStart(2, "0");
+      fields.minutes.textContent = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+      fields.seconds.textContent = String(totalSeconds % 60).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
